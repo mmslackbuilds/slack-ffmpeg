@@ -1,0 +1,4 @@
+#list of packages used to build ffmpeg
+frei0r
+opencv
+lin

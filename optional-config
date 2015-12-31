@@ -1,0 +1,22 @@
+# structure:
+# [optional] describes package dependency group.
+# Each line must have the following structure:
+#
+#   package type ffmpeg-param script-params
+#     ffmpeg-param: must be PARAM=param, this parameter will be passed to ffmpeg
+#                   in configuration (configure) phase,
+#                   like --enable-param, if PARAM is given without any value
+#                   then uses the package's name.
+#     script-params: are parameters passed to SlackBuild, like LARGEFILES='yes'.
+sdf
+[opencv]
+eigen3 sbo
+opencv sbo PARAM
+
+[frei0r]
+gavl sbo
+frei0r sbo PARAM
+
+[test]
+data sbo
+test sbo PARAM

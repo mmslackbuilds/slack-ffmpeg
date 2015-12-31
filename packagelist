@@ -1,5 +1,3 @@
-#avxsynth remember for use with ffmpeg
-
 sbo eigen3 #used in opencv
 sbo opencv PARAM RECURSIVE #used in ffmpeg frei0r, optionally uses ffmpeg optional: numpy qt5
 
@@ -27,7 +25,7 @@ sbo libdc1394 PARAM #used in ffmpe
 
 sbo celt PARAM #used in ffmpeg
 
-orc #used in ffmpeg 
+orc #used in ffmpeg
 
 External library support:
   --enable-avisynth        enable reading of AviSynth script files [no]
@@ -119,4 +117,3 @@ External library support:
   --enable-x11grab         enable X11 grabbing (legacy) [no]
   --disable-xlib           disable xlib [autodetect]
   --disable-zlib           disable zlib [autodetect]
-
