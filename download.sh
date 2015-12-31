@@ -1,8 +1,7 @@
 #!/bin/sh
 
 CWD=$(pwd)
-DOWNLOAD_DIR='downloads'
-DOWNLOAD_PATH=$CWD/$DOWNLOAD_DIR
+DOWNLOAD_PATH="$CWD/downloads"
 
 set -e
 
@@ -53,9 +52,8 @@ function downloadSource()
 #   makeSymbolicLink INFOFILE FILE
 function makeSymbolicLink()
 {
-  ( cd $(dirname "$CWD/$1")
-    ln -sf ../$DOWNLOAD_DIR/$2 $2
-  )
+  DESTDIR=$(dirname "$CWD/$1")
+  ln -sf $DOWNLOAD_PATH/$2 $DESTDIR/$2
 }
 
 if [ ! -d $DOWNLOAD_PATH ]; then
