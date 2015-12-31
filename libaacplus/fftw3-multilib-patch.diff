@@ -1,0 +1,12 @@
+diff -Naur libaacplus-2.0.2.orig/m4/acinclude.m4 libaacplus-2.0.2/m4/acinclude.m4
+--- libaacplus-2.0.2.orig/m4/acinclude.m4	2010-11-10 15:27:38.000000000 -0600
++++ libaacplus-2.0.2/m4/acinclude.m4	2015-12-05 21:28:01.120606982 -0600
+@@ -43,7 +43,7 @@
+ dnl-----------------------------------------------------------------------------
+ AC_DEFUN([LA_SEARCH_LIB],[
+   dnl look for lib
+-  LA_SEARCH_FILE($1, $3, $5 $5/lib64 $5/lib )
++  LA_SEARCH_FILE($1, $3, $5 $5/lib $5/lib64 )
+   dnl look for header.
+   LA_SEARCH_FILE($2, $4, $5 $5/include )
+   if test ".$1" = "." || test ".$2" = "."; then

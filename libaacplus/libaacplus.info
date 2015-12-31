@@ -1,0 +1,10 @@
+PRGNAM="libaacplus"
+VERSION="2.0.2"
+HOMEPAGE="http://tipok.org.ua/node/17"
+DOWNLOAD="http://tipok.org.ua/downloads/media/aacplus/libaacplus/libaacplus-2.0.2.tar.gz \
+          http://www.3gpp.org/ftp/Specs/archive/26_series/26.410/26410-800.zip"
+MD5SUM="3fc15d5aa91d0e8b8f94acb6555103da \
+        2346a0f709d42cee88b784c513744e98"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""

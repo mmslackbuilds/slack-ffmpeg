@@ -1,0 +1,8 @@
+PRGNAM="libass"
+VERSION="0.13.1"
+HOMEPAGE="https://github.com/libass/libass"
+DOWNLOAD="https://github.com/libass/libass/releases/download/0.13.1/libass-0.13.1.tar.xz"
+MD5SUM="43b5f379e70b3aef15b2435e21e5b73c"
+DOWNLOAD_x86_64=""
+MD5SUM_x86_64=""
+REQUIRES=""

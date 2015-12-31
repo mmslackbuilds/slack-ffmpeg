@@ -1,0 +1,122 @@
+#avxsynth remember for use with ffmpeg
+
+sbo eigen3 #used in opencv
+sbo opencv PARAM RECURSIVE #used in ffmpeg frei0r, optionally uses ffmpeg optional: numpy qt5
+
+sbo gavl #used in frei0r
+sbo frei0r PARAM #used in ffmpeg
+
+sbo ladspa_sdk PARAM=ladspa #used in ffmpeg
+
+libaacplus PARAM #used in ffmpeg
+
+recode #used in enca
+enca #used in libass
+libass PARAM #used in ffmpeg (largefiles disabled)
+
+libaacs #used in libbluray, libbdplus (largefiles enabled)
+libbdplus #used in libbluray (largefiles enabled)
+libbluray PARAM ENABLE_EXAMPLES=yes #used in ffmpeg (largefiles enabled) optional: graphviz (gts), jdk, apache-ant
+
+sbo libbs2b PARAM
+
+sbo imlib2 #used by libcaca
+
+sbo libavc1394 #used in ffmpeg with libdc1394
+sbo libdc1394 PARAM #used in ffmpe
+
+sbo celt PARAM #used in ffmpeg
+
+orc #used in ffmpeg 
+
+External library support:
+  --enable-avisynth        enable reading of AviSynth script files [no]
+  --disable-bzlib          disable bzlib [autodetect]
+  --enable-fontconfig      enable fontconfig, useful for drawtext filter [no]
+  --enable-frei0r          enable frei0r video filtering [no]
+  --enable-gnutls          enable gnutls, needed for https support
+                           if openssl is not used [no]
+  --disable-iconv          disable iconv [autodetect]
+  --enable-ladspa          enable LADSPA audio filtering [no]
+  --enable-libaacplus      enable AAC+ encoding via libaacplus [no]
+  --enable-libass          enable libass subtitles rendering,
+                           needed for subtitles and ass filter [no]
+  --enable-libbluray       enable BluRay reading using libbluray [no]
+  --enable-libbs2b         enable bs2b DSP library [no]
+  --enable-libcaca         enable textual display using libcaca [no]
+  --enable-libcelt         enable CELT decoding via libcelt [no]
+  --enable-libcdio         enable audio CD grabbing with libcdio [no]
+  --enable-libdc1394       enable IIDC-1394 grabbing using libdc1394
+                           and libraw1394 [no]
+  --enable-libdcadec       enable DCA decoding via libdcadec [no]*
+  --enable-libfaac         enable AAC encoding via libfaac [no]
+  --enable-libfdk-aac      enable AAC de/encoding via libfdk-aac [no]
+  --enable-libflite        enable flite (voice synthesis) support via libflite [no]
+  --enable-libfreetype     enable libfreetype, needed for drawtext filter [no]
+  --enable-libfribidi      enable libfribidi, improves drawtext filter [no]
+  --enable-libgme          enable Game Music Emu via libgme [no]
+  --enable-libgsm          enable GSM de/encoding via libgsm [no]
+  --enable-libiec61883     enable iec61883 via libiec61883 [no]
+  --enable-libilbc         enable iLBC de/encoding via libilbc [no]
+  --enable-libkvazaar      enable HEVC encoding via libkvazaar [no]
+  --enable-libmfx          enable HW acceleration through libmfx
+  --enable-libmodplug      enable ModPlug via libmodplug [no]
+  --enable-libmp3lame      enable MP3 encoding via libmp3lame [no]
+  --enable-libnut          enable NUT (de)muxing via libnut,
+                           native (de)muxer exists [no]
+  --enable-libopencore-amrnb enable AMR-NB de/encoding via libopencore-amrnb [no]
+  --enable-libopencore-amrwb enable AMR-WB decoding via libopencore-amrwb [no]
+  --enable-libopencv       enable video filtering via libopencv [no]
+  --enable-libopenh264     enable H.264 encoding via OpenH264 [no]
+  --enable-libopenjpeg     enable JPEG 2000 de/encoding via OpenJPEG [no]
+  --enable-libopus         enable Opus de/encoding via libopus [no]
+  --enable-libpulse        enable Pulseaudio input via libpulse [no]
+  --enable-libquvi         enable quvi input via libquvi [no]
+  --enable-librtmp         enable RTMP[E] support via librtmp [no]
+  --enable-libschroedinger enable Dirac de/encoding via libschroedinger [no]
+  --enable-libshine        enable fixed-point MP3 encoding via libshine [no]
+  --enable-libsmbclient    enable Samba protocol via libsmbclient [no]
+  --enable-libsnappy       enable Snappy compression, needed for hap encoding [no]
+  --enable-libsoxr         enable Include libsoxr resampling [no]
+  --enable-libspeex        enable Speex de/encoding via libspeex [no]
+  --enable-libssh          enable SFTP protocol via libssh [no]
+  --enable-libstagefright-h264  enable H.264 decoding via libstagefright [no]
+  --enable-libtheora       enable Theora encoding via libtheora [no]
+  --enable-libtwolame      enable MP2 encoding via libtwolame [no]
+  --enable-libutvideo      enable Ut Video encoding and decoding via libutvideo [no]
+  --enable-libv4l2         enable libv4l2/v4l-utils [no]
+  --enable-libvidstab      enable video stabilization using vid.stab [no]
+  --enable-libvo-aacenc    enable AAC encoding via libvo-aacenc [no]
+  --enable-libvo-amrwbenc  enable AMR-WB encoding via libvo-amrwbenc [no]
+  --enable-libvorbis       enable Vorbis en/decoding via libvorbis,
+                           native implementation exists [no]
+  --enable-libvpx          enable VP8 and VP9 de/encoding via libvpx [no]
+  --enable-libwavpack      enable wavpack encoding via libwavpack [no]
+  --enable-libwebp         enable WebP encoding via libwebp [no]
+  --enable-libx264         enable H.264 encoding via x264 [no]
+  --enable-libx265         enable HEVC encoding via x265 [no]
+  --enable-libxavs         enable AVS encoding via xavs [no]
+  --enable-libxcb          enable X11 grabbing using XCB [autodetect]
+  --enable-libxcb-shm      enable X11 grabbing shm communication [autodetect]
+  --enable-libxcb-xfixes   enable X11 grabbing mouse rendering [autodetect]
+  --enable-libxcb-shape    enable X11 grabbing shape rendering [autodetect]
+  --enable-libxvid         enable Xvid encoding via xvidcore,
+                           native MPEG-4/Xvid encoder exists [no]
+  --enable-libzmq          enable message passing via libzmq [no]
+  --enable-libzvbi         enable teletext support via libzvbi [no]
+  --disable-lzma           disable lzma [autodetect]
+  --enable-decklink        enable Blackmagick DeckLink I/O support [no]
+  --enable-mmal            enable decoding via MMAL [no]
+  --enable-nvenc           enable NVIDIA NVENC support [no]
+  --enable-openal          enable OpenAL 1.1 capture support [no]
+  --enable-opencl          enable OpenCL code
+  --enable-opengl          enable OpenGL rendering [no]
+  --enable-openssl         enable openssl, needed for https support
+                           if gnutls is not used [no]
+  --disable-sdl            disable sdl [autodetect]
+  --disable-securetransport disable Secure Transport, needed for TLS support
+                           on OSX if openssl and gnutls are not used [autodetect]
+  --enable-x11grab         enable X11 grabbing (legacy) [no]
+  --disable-xlib           disable xlib [autodetect]
+  --disable-zlib           disable zlib [autodetect]
+
