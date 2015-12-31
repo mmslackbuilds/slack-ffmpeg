@@ -2,16 +2,19 @@
 # [optional] describes package dependency group.
 # Each line must have the following structure:
 #
-#   package type ffmpeg-param script-params
-#     ffmpeg-param: must be PARAM=param, this parameter will be passed to ffmpeg
-#                   in configuration (configure) phase,
-#                   like --enable-param, if PARAM is given without any value
-#                   then uses the package's name.
-#     script-params: are parameters passed to SlackBuild, like LARGEFILES='yes'.
-sdf
+#   package type [PARAM[=ffmpeg-param]] [script-params]
+#     type: sbo or slakcbuild
+#     PARAM: must be PARAM=param, this parameter will be passed to ffmpeg
+#            in configuration (configure) phase, like --enable-param,
+#            if PARAM is given without any value then uses the package's name.
+#     script-params: are parameters passed to SlackBuild or sbopkg, like LARGEFILES='yes'.
+
 [opencv]
+eigen2 sbo ENABLE_JAVA=YES ENABLE_JDK=yes
+eigen1 sbo PARAM=eig
 eigen3 sbo
-opencv sbo PARAM
+eigen4 slackbuild RECURSIVE ENABLE_USE=yes ENABLE_CAT=no
+opencv sbo PARAM USE=yes SOME=no
 
 [frei0r]
 gavl sbo
