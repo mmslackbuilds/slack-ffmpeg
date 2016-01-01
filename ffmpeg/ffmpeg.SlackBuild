@@ -25,7 +25,7 @@
 PRGNAM=ffmpeg
 VERSION=${VERSION:-2.8.4}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_sfp}
+TAG=${TAG:-_mms}
 FREE_PATENTS=${FREE_PATENTS:-'yes'}
 
 if [ -z "$ARCH" ]; then

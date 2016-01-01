@@ -32,7 +32,7 @@
 PRGNAM=flite
 VERSION=${VERSION:-2.0.0}
 BUILD=${BUILD:-1}
-TAG=${TAG:-_sfp}
+TAG=${TAG:-_mms}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
