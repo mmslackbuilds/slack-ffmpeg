@@ -1,10 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for libbluray
+# Slackware build script for dcadec
 
 # Copyright 2015 Dhaby Xiloj <slack.dhabyx@gmail.com>
-# Taked from SlackBuilds.org, originally mantained by:
-#     Copyright 2011-2015 Larry Hajali <larryhaja[at]gmail[dot]com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -13,7 +11,7 @@
 # 1. Redistributions of this script must retain the above copyright
 #    notice, this list of conditions and the following disclaimer.
 #
-#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+#  THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
 #  WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
 #  MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
 #  EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
@@ -24,13 +22,10 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=libbluray
-VERSION=${VERSION:-0.9.2}
+PRGNAM=dcadec
+VERSION=${VERSION:-0.1.0}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_sfp}
-
-# Enable example utilities
-ENABLE_EXAMPLES=${ENABLE_EXAMPLES:-no}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -39,6 +34,8 @@ if [ -z "$ARCH" ]; then
        *) ARCH=$( uname -m ) ;;
   esac
 fi
+
+DOCS="COPYING.LGPL* README.md"
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/build}
@@ -65,7 +62,7 @@ rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xvf $CWD/$PRGNAM-$VERSION.tar.bz2
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz || tar xvf $CWD/v$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -74,58 +71,19 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-# Hack for compiling xine plugin bindings for libbluray.
-sed -i -e '/pkg-config libbluray/d' -e 's|0644|0755|' player_wrappers/xine/Makefile
+export PREFIX=/usr
+export LIBDIR=/usr/lib${LIBDIRSUFFIX}
+export CONFIG_SHARED=TRUE
 
-EXAMPLES="--disable-examples"
-if [ "$ENABLE_EXAMPLES" = "yes" ]; then
-    EXAMPLES="--enable-examples"
-fi
-
-JAVA_ARGS="--disable-bdjava"
-if [ "${JAVA:-no}" == 'yes' ]; then
-  JAVA_ARGS="--enable-bdjava"
-fi
-
-CFLAGS="$SLKCFLAGS" \
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --disable-silent-rules \
-  --enable-static=no \
-  --enable-udf \
-  ${EXAMPLES} \
-  ${JAVA_ARGS} \
-  --enable-doxygen-html \
-  --disable-doxygen-ps \
-  --disable-doxygen-pdf \
-  --build=$ARCH-slackware-linux
-
-make
-make doxygen-doc
+CFLAGS="$SLKCFLAGS" make $PARAMS
 make install DESTDIR=$PKG
-
-# Install the xine bluray plugin
-CFLAGS="$SLKCFLAGS -I$PKG/usr/include" \
-LDFLAGS="-L$PKG/usr/lib$LIBDIRSUFFIX" \
-LIBS_BD="-lbluray" \
-make -C player_wrappers/xine DESTDIR=$PKG install
-
-# Install example utilities
-if [ $ENABLE_EXAMPLES = "yes" ]; then
-    UTILS=$(find . -type f -executable -maxdepth 1 \
-            ! -name 'config*' ! -name 'bootstrap' ! -name 'libtool')
-    for UTIL in $UTILS; do
-        install -Dp -m 0755 $UTIL $PKG/usr/bin/$UTIL
-    done;
-fi
 
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
+# Copy program documentation into the package
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
-cp -a COPYING README.txt player_wrappers/xine/HOWTO $PKG/usr/doc/$PRGNAM-$VERSION
-cp -r doc/doxygen/html $PKG/usr/doc/$PRGNAM-$VERSION
+cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
