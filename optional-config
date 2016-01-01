@@ -2,24 +2,162 @@
 # [optional] describes package dependency group.
 # Each line must have the following structure:
 #
-#   package type [PARAM[=ffmpeg-param]] [script-params]
+#   package type [PARAM[=ffmpeg-param]] [RECUSRSIVE] [script-params]
 #     type: sbo or slakcbuild
 #     PARAM: must be PARAM=param, this parameter will be passed to ffmpeg
 #            in configuration (configure) phase, like --enable-param,
 #            if PARAM is given without any value then uses the package's name.
-#     script-params: are parameters passed to SlackBuild or sbopkg, like LARGEFILES='yes'.
+#            Multiple parameters can be used: PARAM=param1:param2
+#     RECURSIVE: build again if recursive mode is enabled, some packages contain
+#            optional recursive dependencies
+#     script-params: are parameters passed to SlackBuild or sbopkg, like JAVA='yes'.
+
 
 [opencv]
-eigen2 sbo ENABLE_JAVA=YES ENABLE_JDK=yes
-eigen1 sbo PARAM=eig
-eigen3 sbo
-eigen4 slackbuild RECURSIVE ENABLE_USE=yes ENABLE_CAT=no
-opencv sbo PARAM USE=yes SOME=no
+# eigen3 exists in slackware current
+# eigen3 sbo
+# Optional packages for opencv
+##  numpy (python bindings)
+## numpy sbo
+##  Qt 5 (Qt support)
+## qt5 sbo
+opencv sbo PARAM=libopencv
 
 [frei0r]
 gavl sbo
 frei0r sbo PARAM
 
-[test]
-data sbo
-test sbo PARAM
+[ladspa]
+ladspa_sdk sbo PARAM=ladspa
+
+[libaacplus]
+libaacplus slackbuild PARAM
+
+[libass]
+libass slackbuild PARAM
+
+[libbluray]
+libaacs sbo
+libbdplus sbo
+# if you need enable java, uncomment following packages and add JAVA=yes to params
+# jdk sbo # please download jdk manually. see README of jdk
+# apache-ant sbo
+libbluray slackbuild PARAM ENABLE_EXAMPLES=yes # JAVA=yes
+
+[libbs2b]
+libbs2b sbo PARAM
+
+[celt]
+celt sbo PARAM=libcelt
+
+[libdc1394]
+libdc1394 sbo PARAM
+
+[dcadec]
+dcadec slackbuild PARAM=libdcadec
+
+[faac]
+libmp4v2 sbo
+faac sbo PARAM=libfaac
+
+[libfdk-aac]
+libfdk-aac sbo PARAM
+
+[flite]
+flite slackbuild PARAM=libflite
+
+[libgme]
+libgme sbo PARAM
+
+[gsm]
+gsm sbo PARAM=libgsm
+
+[libiec61883]
+libavc1394 sbo
+libiec61883 sbo PARAM
+
+[libilbc]
+libilbc sbo PARAM
+
+[libmodplug]
+libmodplug sbo PARAM
+
+[lame]
+lame sbo PARAM=libmp3lame
+
+[opencore-amr]
+opencore-amr sbo PARAM=libopencore-amrnb:libopencore-amrwb
+
+[openjpeg]
+openjpeg1 slackbuild PARAM=libopenjpeg
+
+[opus]
+opus sbo PARAM=libopus
+
+[libquvi]
+lua sbo
+libquvi-scripts sbo
+libquvi sbo PARAM
+# optional quvi commands
+# quvi sbo
+
+[rtmpdump]
+rtmpdump sbo PARAM=librtmp
+
+[schroedinger]
+# requires
+# orc sbo # now in current
+schroedinger sbo PARAM=libschroedinger
+
+[speex]
+speex sbo PARAM=libspeex
+
+[twolame]
+twolame sbo PARAM=libtwolame
+
+[vidstab]
+# optional vo-aacenc/voAAC.hq
+# transcode sbo
+vid.stab sbo PARAM=libvidstab # TRANSCODE=yes
+
+[libvo-aacenc]
+#TODO
+vo-aacenc slackbuild
+
+#libvpx now is in current
+#[libvpx]
+#libvpx sbo PARAM
+
+[libwebp]
+libwebp sbo PARAM
+
+[x264]
+x264 sbo PARAM=libx264
+
+[x265]
+x265 sbo PARAM=libx265
+
+[xvidcore]
+xvidcore sbo PARAM=libxvid
+
+[zvbi]
+zvbi sbo PARAM=libzvbi
+
+[openal]
+OpenAL sbo PARAM=openal
+
+[opencl]
+opencl-headers sbo PARAM=opencl
+
+[pulseaudio]
+# optional for pulseaudio
+# orc sbo # now in current and possible build in schroedinger package
+libasyncns sbo
+# required by pulseaudio
+speex sbo
+json-c sbo
+pulseaudio sbo PARAM=libpulse
+
+[ffmpeg]
+ffmpeg slackbuild
+opencv RECURSIVE  #opencv can use ffmpeg

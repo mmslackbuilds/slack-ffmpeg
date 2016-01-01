@@ -1,3 +1,40 @@
 #list of packages used to build ffmpeg
-frei0r
-opencv
+ffmpeg
+#
+#frei0r
+#opencv
+#ladspa
+libaacplus
+#libass
+#libbluray
+#libbs2b
+#celt
+#libdc1394
+#dcadec
+#faac
+#libfdk-aac
+#flite
+#libgme
+#libiec61883
+#libilbc # iLBC de/encoding via libilb
+#libmodplug
+#lame
+#opencore-amr
+#openjpeg
+#opus
+#libquvi
+#rtmpdump
+#schroedinger
+#twolame
+#vidstab
+#libvo-aacenc
+#libvpx #now in current
+#libwebp
+#x264
+#x265
+#xvidcore
+#zvbi
+#openal
+#opencl
+#speex
+#pulseaudio
