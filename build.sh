@@ -2,13 +2,15 @@
 
 # DEBUG_LEVEL: 0 no debug
 #              1 basic debug and show packages added
-#              2 show ignored packages
+#              2 show ignored grup of packages
 #              3 show parameters added to ffmpeg
-DEBUG_LEVEL=${DEBUG_LEVEL:-1}
+DEBUG_LEVEL=${DEBUG_LEVEL:-0}
 # Enable recursive packages
-RECURSIVE=${RECURSIVE:-'yes'}
+RECURSIVE=${RECURSIVE:-'no'}
 # Simulate installation
-SIMULATION=${SIMULATION:-'no'}
+SIMULATION=${SIMULATION:-'yes'}
+
+LOCAL_SLACKBUILDS_TAG="_mms"
 
 CWD=$(pwd)
 
@@ -27,7 +29,7 @@ function sbopkgInstall()
 {
   EXEC_CMD="echo p  | $2 sbopkg -B -e stop -i $1"
   if [ $DEBUG_LEVEL -gt 2 ]; then
-    echo $EXEC_CMD
+    echo "   EXEC: Adding execution string: $EXEC_CMD"
   fi
   EXEC_CMD_LIST+=( "${EXEC_CMD}" )
 }
@@ -36,9 +38,9 @@ function sbopkgInstall()
 #   slackbuildInstall PACKAGE [PARAMS]
 function slackbuildInstall()
 {
-  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1*_sfp.tgz )"
+  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1*${LOCAL_SLACKBUILDS_TAG}.tgz )"
   if [ $DEBUG_LEVEL -gt 2 ]; then
-    echo $EXEC_CMD
+    echo "   EXEC: Adding execution string $EXEC_CMD"
   fi
   EXEC_CMD_LIST+=( "${EXEC_CMD}" )
 }
@@ -49,7 +51,7 @@ function slackbuildInstall()
 function addToFFMPEG()
 {
   if [ $DEBUG_LEVEL -gt 2 ]; then
-    echo "ADD TO FFMPEG --enable-$1"
+    echo "   PARAM: Adding optional param --enable-$1"
   fi
   FFMPEG_DEPS="${FFMPEG_DEPS}--enable-$1 "
 }
@@ -72,6 +74,7 @@ function processConfigLine()
       if [ "${PARAM}" = "PARAM" ]; then
         addToFFMPEG ${PARAMS[1]}
       elif [[ "${PARAM}" =~ PARAM.* ]]; then
+        # param with custom string
         FFMPEG_PARAM=$(echo ${PARAM} | cut -d '=' -f 2)
         IFS=':' read -r  -a FFMPEG_PARAM_ARR <<< ${FFMPEG_PARAM}
         if [ ${#FFMPEG_PARAM_ARR[@]} -gt 1 ]; then
@@ -81,9 +84,10 @@ function processConfigLine()
         else
           addToFFMPEG $(echo ${PARAM} | cut -d '=' -f 2)
         fi
-      elif [ ${PARAM} = "RECURSIVE" ]; then
+      elif [ "${PARAM}" = "RECURSIVE" ]; then
+        # recursive packages
         if [ $DEBUG_LEVEL -gt 0 ]; then
-          echo "RECURSIVE package: ${PARAMS[1]}"
+          echo "   RECURSIVE package: ${PARAMS[1]}"
         fi
         RECURSIVE_PKG=true
       else
@@ -92,17 +96,20 @@ function processConfigLine()
     done
   fi
   if [ $RECURSIVE = 'no' -a $RECURSIVE_PKG = true ]; then
-    if [ $DEBUG_LEVEL -gt 1 ]; then
-      echo "RECURSIVE package ignored: ${PARAMS[1]}"
+    if [ $DEBUG_LEVEL -gt 0 ]; then
+      echo "      RECURSIVE package ignored: ${PARAMS[1]}"
     fi
   else
     if [ ${PARAMS[2]} = 'sbo' ]; then
       sbopkgInstall ${PARAMS[1]} "$EXTRA_PARAMS"
     elif [ ${PARAMS[2]} = 'slackbuild' ]; then
       slackbuildInstall ${PARAMS[1]} "$EXTRA_PARAMS"
+    else
+      echo "ERROR: In $OPTIONAL_CONFIG_FILE the line with '${PARAMS[@]:1}' in group '${PARAMS[0]}' is wrong, read comments in this file." 1>&2
+      exit 1
     fi
     if [ $DEBUG_LEVEL -gt 0 ]; then
-      echo "Group [${PARAMS[0]}]: add package ${PARAMS[1]}"
+      echo "   Group [${PARAMS[0]}]: package '${PARAMS[1]}' added"
     fi
   fi
 }
@@ -129,7 +136,7 @@ while IFS=' ' read -r CFG_LINE; do
     BAD_OPTIONAL_PKG=( ${BAD_OPTIONAL_PKG[@]#${GROUP}} )
     if [ "${TEST_LIST}" != "${OPTIONAL_LIST[*]}" ]; then
       # unequal means group is in optional dependencies list
-      echo "ADDING optional package: [$GROUP]"
+      echo "ADDING package group: [$GROUP]"
       GROUPNAME=$GROUP
       IN_GROUP='yes'
     else
@@ -150,6 +157,13 @@ if [ ${#BAD_OPTIONAL_PKG[*]} -gt 0 ]; then
   echo "WARNING: Packages in $OPTIONAL_DEPS_FILE with no effect: ${BAD_OPTIONAL_PKG[*]}"
 fi
 
+export FFMPEG_DEPS
+
+if [ $SIMULATION != 'no' ]; then
+  echo "==============================================="
+  echo "List of commands to be executed:"
+fi
+
 for CMD in "${EXEC_CMD_LIST[@]}"; do
   if [ $SIMULATION != 'no' ]; then
     echo $CMD
@@ -158,10 +172,7 @@ for CMD in "${EXEC_CMD_LIST[@]}"; do
   fi
 done
 
-export FFMPEG_DEPS
-
-# cd ffmpeg
-#  ./ffmpeg.SlackBuild
-if [ $DEBUG_LEVEL -gt 0 ]; then
-  echo "ffmpeg params to SlackBuild: "$FFMPEG_DEPS
+if [ $DEBUG_LEVEL -gt 0 -o $SIMULATION != 'no' ]; then
+  echo "==============================================="
+  echo "Optional parameters added to ffmpeg.SlackBuild: "$FFMPEG_DEPS
 fi

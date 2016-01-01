@@ -1,5 +1,7 @@
 # structure:
-# [optional] describes package dependency group.
+# [optional] describes a package dependency group. The order to build groups and
+#            packages is given by this file.
+#
 # Each line must have the following structure:
 #
 #   package type [PARAM[=ffmpeg-param]] [RECUSRSIVE] [script-params]
@@ -151,13 +153,14 @@ opencl-headers sbo PARAM=opencl
 
 [pulseaudio]
 # optional for pulseaudio
-# orc sbo # now in current and possible build in schroedinger package
+# orc sbo # now in current 
 libasyncns sbo
 # required by pulseaudio
 speex sbo
 json-c sbo
 pulseaudio sbo PARAM=libpulse
 
+# ffmpeg must be the last item in this list
 [ffmpeg]
 ffmpeg slackbuild
-opencv RECURSIVE  #opencv can use ffmpeg
+opencv sbo RECURSIVE  #opencv can use ffmpeg
