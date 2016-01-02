@@ -10,7 +10,7 @@ RECURSIVE=${RECURSIVE:-'no'}
 # Simulate installation
 SIMULATION=${SIMULATION:-'yes'}
 
-LOCAL_SLACKBUILDS_TAG="_mms"
+TAG=${TAG:-'_mmsb'}
 
 CWD=$(pwd)
 
@@ -38,7 +38,7 @@ function sbopkgInstall()
 #   slackbuildInstall PACKAGE [PARAMS]
 function slackbuildInstall()
 {
-  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1*${LOCAL_SLACKBUILDS_TAG}.tgz )"
+  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1*${TAG}.tgz )"
   if [ $DEBUG_LEVEL -gt 2 ]; then
     echo "   EXEC: Adding execution string $EXEC_CMD"
   fi
