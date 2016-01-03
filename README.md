@@ -55,6 +55,6 @@ SIMULATION=no ./build.sh
 
 # Hacking
 
-You can edit the file **opgiona-config** for add more group of packages and add or remove dependencies for a particular group. This file contain help for edit properly.
+You can edit the file **optional-config** for add more groups of packages and add or remove dependencies for a particular group. This file contain help for properly edition.
 
 Many SlackBuilds for other packages are in develop for now, you can see the **packagelist** file with a list of external library support for ffmpeg.
