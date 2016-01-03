@@ -38,7 +38,8 @@ function sbopkgInstall()
 #   slackbuildInstall PACKAGE [PARAMS]
 function slackbuildInstall()
 {
-  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1*${TAG}.tgz )"
+  VERSION=$(grep VERSION $1/$1.info | cut -d '"' -f 2)
+  EXEC_CMD="(cd $1; $2 ./$1.SlackBuild && upgradepkg --reinstall --install-new /tmp/$1-${VERSION}*${TAG}.tgz )"
   if [ $DEBUG_LEVEL -gt 2 ]; then
     echo "   EXEC: Adding execution string $EXEC_CMD"
   fi
@@ -171,6 +172,9 @@ for CMD in "${EXEC_CMD_LIST[@]}"; do
     eval $CMD || exit 1
   fi
 done
+
+# cd ffmpeg
+# ./ffmpeg.SlackBuild
 
 if [ $DEBUG_LEVEL -gt 0 -o $SIMULATION != 'no' ]; then
   echo "==============================================="

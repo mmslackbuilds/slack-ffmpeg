@@ -81,11 +81,17 @@ libiec61883 sbo PARAM
 [libilbc]
 libilbc sbo PARAM
 
+[kvazaar]
+kvazaar slackbuild PARAM=libkvazaar
+
 [libmodplug]
 libmodplug sbo PARAM
 
 [lame]
 lame sbo PARAM=libmp3lame
+
+[nut]
+nut slackbuild PARAM=libnut
 
 [opencore-amr]
 opencore-amr sbo PARAM=libopencore-amrnb:libopencore-amrwb
@@ -148,12 +154,13 @@ zvbi sbo PARAM=libzvbi
 [openal]
 OpenAL sbo PARAM=openal
 
-[opencl]
-opencl-headers sbo PARAM=opencl
+# in testing
+#[opencl]
+#opencl-headers sbo PARAM=opencl
 
 [pulseaudio]
 # optional for pulseaudio
-# orc sbo # now in current 
+# orc sbo # now in current
 libasyncns sbo
 # required by pulseaudio
 speex sbo
@@ -163,4 +170,4 @@ pulseaudio sbo PARAM=libpulse
 # ffmpeg must be the last item in this list
 [ffmpeg]
 ffmpeg slackbuild
-opencv sbo RECURSIVE  #opencv can use ffmpeg
+# opencv sbo RECURSIVE  #opencv can use ffmpeg
