@@ -1,5 +1,5 @@
 #list of packages used to build ffmpeg
-ffmpeg
+ffmpeg # build ffmpeg
 
 frei0r # frei0r video filtering
 ladspa # LADSPA audio filtering
