@@ -1,0 +1,17 @@
+--- kvazaar-0.7.2/src/Makefile	2015-10-30 09:31:55.000000000 -0600
++++ kvazaar-0.7.2.patched/src/Makefile	2016-01-01 21:30:15.631060823 -0600
+@@ -5,10 +5,10 @@
+ 
+ # Installation locations
+ DESTDIR =
+-PREFIX  = /usr/local
+-BINDIR  = $(PREFIX)/bin
+-INCDIR  = $(PREFIX)/include
+-LIBDIR  = $(PREFIX)/lib
++PREFIX  ?= /usr/local
++BINDIR  ?= $(PREFIX)/bin
++INCDIR  ?= $(PREFIX)/include
++LIBDIR  ?= $(PREFIX)/lib
+ DLLDIR  = $(BINDIR)
+ 
+ # Library version number

@@ -1,0 +1,5 @@
+Kvazaar is the leading academic open-source HEVC encoder
+developed from scratch in C.
+
+Kvazaar is modular and portable HEVC encoder that attains high
+coding efficiency with optimized coding speed and resources.
