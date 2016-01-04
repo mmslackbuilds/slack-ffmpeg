@@ -132,6 +132,9 @@ speex sbo PARAM=libspeex
 [twolame]
 twolame sbo PARAM=libtwolame
 
+[libutvideo]
+libutvideo slackbuild PARAM
+
 [vidstab]
 # optional vo-aacenc/voAAC.hq
 # transcode sbo
