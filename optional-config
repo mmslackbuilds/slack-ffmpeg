@@ -123,6 +123,9 @@ shine slackbuild PARAM=libshine
 [snappy]
 snappy slackbuild PARAM=libsnappy
 
+[soxr]
+soxr slackbuild PARAM=libsoxr
+
 [speex]
 speex sbo PARAM=libspeex
 

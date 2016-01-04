@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+       |-----handy-ruler------------------------------------------------------|
+soxr: soxr (The SoX Resampler library)
+soxr:
+soxr: The SoX Resampler library that aims to give fast and high quality results
+soxr: for any constant resampling ratio.
+soxr:
+soxr: The SoX Resampler library `libsoxr' performs one-dimensional sample-rate
+soxr: conversion -- it may be used, for example, to resample PCM-encoded audio.
+soxr: For higher-dimensional resampling, such as for visual-image processing,
+soxr: you should look elsewhere.
+soxr:
+soxr:
