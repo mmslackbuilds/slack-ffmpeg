@@ -136,13 +136,11 @@ twolame sbo PARAM=libtwolame
 libutvideo slackbuild PARAM
 
 [vidstab]
-# optional vo-aacenc/voAAC.hq
 # transcode sbo
 vid.stab sbo PARAM=libvidstab # TRANSCODE=yes
 
-[libvo-aacenc]
-#TODO
-vo-aacenc slackbuild
+[vo-aacenc]
+vo-aacenc slackbuild PARAM=libvo-aacenc
 
 #libvpx now is in current
 #[libvpx]
