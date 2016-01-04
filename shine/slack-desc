@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+       |-----handy-ruler------------------------------------------------------|
+shine: shine (Super fast fixed-point MP3 encoder)
+shine:
+shine: Shine is a blazing fast mp3 encoding library implemented in fixed-point
+shine: arithmetic. The library can thus be used to perform super fast mp3
+shine: encoding on architectures without a FPU, such as armel, etc.. It is
+shine: also, however, also super fast on architectures with a FPU!
+shine:
+shine:
+shine:
+shine:
+shine:

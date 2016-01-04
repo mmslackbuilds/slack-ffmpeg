@@ -117,6 +117,9 @@ rtmpdump sbo PARAM=librtmp
 # orc sbo # now in current
 schroedinger sbo PARAM=libschroedinger
 
+[shine]
+shine slackbuild PARAM=libshine
+
 [speex]
 speex sbo PARAM=libspeex
 

@@ -1,4 +1,4 @@
-* dependencies in slackware-current
+* dependencies now in slackware-current
 + added and tested with sbo or slackbuilds
 T Todo
 
@@ -48,7 +48,7 @@ External library support: ffmpeg 2.8.4
   --enable-libquvi +        enable quvi input via libquvi [no]
   --enable-librtmp +        enable RTMP[E] support via librtmp [no]
   --enable-libschroedinger + enable Dirac de/encoding via libschroedinger [no]
-  --enable-libshine  T      enable fixed-point MP3 encoding via libshine [no]
+  --enable-libshine  +      enable fixed-point MP3 encoding via libshine [no]
   --enable-libsmbclient *   enable Samba protocol via libsmbclient [no]
   --enable-libsnappy  T     enable Snappy compression, needed for hap encoding [no]
   --enable-libsoxr  T       enable Include libsoxr resampling [no]
