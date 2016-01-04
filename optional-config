@@ -120,6 +120,9 @@ schroedinger sbo PARAM=libschroedinger
 [shine]
 shine slackbuild PARAM=libshine
 
+[snappy]
+snappy slackbuild PARAM=libsnappy
+
 [speex]
 speex sbo PARAM=libspeex
 
