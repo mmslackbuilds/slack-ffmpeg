@@ -142,6 +142,9 @@ vid.stab sbo PARAM=libvidstab # TRANSCODE=yes
 [vo-aacenc]
 vo-aacenc slackbuild PARAM=libvo-aacenc
 
+[vo-amrwbenc]
+vo-amrwbenc slackbuild PARAM=libvo-amrwbenc
+
 #libvpx now is in current
 #[libvpx]
 #libvpx sbo PARAM
