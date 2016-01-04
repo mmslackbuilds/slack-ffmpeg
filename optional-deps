@@ -1,45 +1,46 @@
-#list of packages used to build ffmpeg
-ffmpeg # build ffmpeg
+# #list of packages used to build ffmpeg
+# ffmpeg # build ffmpeg
+#
+# frei0r # frei0r video filtering
+# ladspa # LADSPA audio filtering
+# libaacplus # AAC+ encoding via libaacplus
+# libass # libass subtitles rendering
+# libbluray # BluRay reading using libbluray
+# libbs2b # bs2b DSP library
+# celt # CELT decoding via libcelt
+# libdc1394 # IIDC-1394 grabbing using libdc1394
+# dcadec # DCA decoding via libdcadec
+# faac # AAC encoding via libfaac
+# libfdk-aac # AAC de/encoding via libfdk-aac
+# flite # flite (voice synthesis) support via libflite
+# libgme # Game Music Emu via libgme
+# gsm # GSM de/encoding via libgsm
+# libiec61883 # iec61883 via libiec61883
+# libilbc # iLBC de/encoding via libilbc
+# kvazaar #  HEVC encoding via libkvazaar
+# libmodplug # enable ModPlug via libmodplug
+# lame # MP3 encoding via libmp3lame
+# nut # NUT (de)muxing via libnut
+# opencore-amr #AMR-NB de/encoding and AMR-WB decoding
+# opencv # video filtering via libopencv
+# openjpeg # JPEG 2000 de/encoding via OpenJPEG
+# opus # Opus de/encoding via libopus
+# pulseaudio # Pulseaudio input via libpulse
+# libquvi # quvi input via libquvi
+# rtmpdump # RTMP[E] support via librtmp
+# schroedinger # Dirac de/encoding via libschroedinger
+# shine # fixed-point MP3 encoding via libshine
+# snappy # Snappy compression, needed for hap encoding
+# soxr # Include libsoxr resampling
+# libutvideo # Ut Video encoding and decoding via libutvideo
+# speex # Speex de/encoding via libspeex
+# twolame # MP2 encoding via libtwolame
+# vidstab # video stabilization using vid.stab
 
-frei0r # frei0r video filtering
-ladspa # LADSPA audio filtering
-libaacplus # AAC+ encoding via libaacplus
-libass # libass subtitles rendering
-libbluray # BluRay reading using libbluray
-libbs2b # bs2b DSP library
-celt # CELT decoding via libcelt
-libdc1394 # IIDC-1394 grabbing using libdc1394
-dcadec # DCA decoding via libdcadec
-faac # AAC encoding via libfaac
-libfdk-aac # AAC de/encoding via libfdk-aac
-flite # flite (voice synthesis) support via libflite
-libgme # Game Music Emu via libgme
-gsm # GSM de/encoding via libgsm
-libiec61883 # iec61883 via libiec61883
-libilbc # iLBC de/encoding via libilbc
-kvazaar #  HEVC encoding via libkvazaar
-libmodplug # enable ModPlug via libmodplug
-lame # MP3 encoding via libmp3lame
-nut # NUT (de)muxing via libnut
-opencore-amr #AMR-NB de/encoding and AMR-WB decoding
-opencv # video filtering via libopencv
-openjpeg # JPEG 2000 de/encoding via OpenJPEG
-opus # Opus de/encoding via libopus
-pulseaudio # Pulseaudio input via libpulse
-libquvi # quvi input via libquvi
-rtmpdump # RTMP[E] support via librtmp
-schroedinger # Dirac de/encoding via libschroedinger
-shine # fixed-point MP3 encoding via libshine
-snappy # Snappy compression, needed for hap encoding
-soxr # Include libsoxr resampling
-libutvideo # Ut Video encoding and decoding via libutvideo
-speex # Speex de/encoding via libspeex
-twolame # MP2 encoding via libtwolame
-vidstab # video stabilization using vid.stab
-libwebp # WebP encoding via libwebp
-x264 # H.264 encoding via x264
-x265 # enable HEVC encoding via x265
-xvidcore # Xvid encoding via xvidcore
-zvbi # teletext support via libzvbi
-openal # OpenAL 1.1 capture support
-#libvo-aacenc
+# libwebp # WebP encoding via libwebp
+# x264 # H.264 encoding via x264
+# x265 # enable HEVC encoding via x265
+# xvidcore # Xvid encoding via xvidcore
+# zvbi # teletext support via libzvbi
+# openal # OpenAL 1.1 capture support
+# #libvo-aacenc
