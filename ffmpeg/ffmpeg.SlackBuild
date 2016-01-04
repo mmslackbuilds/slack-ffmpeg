@@ -131,7 +131,7 @@ CXXFLAGS="$SLKCFLAGS" \
   ${FFMPEG_DEPS} \
   ${PATENTS_PARAMS} \
   ${ARCH_OPTS}
-exit
+  
 make
 make install DESTDIR=$PKG
 
