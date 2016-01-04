@@ -99,6 +99,13 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
+echo "Configuring ffmpeg ..."
+
+# configure path for decklink headers according to SBo
+if [[ ${FFMPEG_DEPS} =~ --enable-decklink ]] ; then
+  SLKCFLAGS="$SLKCFLAGS -I/usr/include/decklink" ; 
+fi
+
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
@@ -131,7 +138,7 @@ CXXFLAGS="$SLKCFLAGS" \
   ${FFMPEG_DEPS} \
   ${PATENTS_PARAMS} \
   ${ARCH_OPTS}
-exit
+
 make
 make install DESTDIR=$PKG
 

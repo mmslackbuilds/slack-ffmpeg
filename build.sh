@@ -195,8 +195,9 @@ for CMD in "${EXEC_CMD_LIST[@]}"; do
   fi
 done
 
-cd ffmpeg
-./ffmpeg.SlackBuild
+# Area for testings
+# cd ffmpeg
+# ./ffmpeg.SlackBuild
 
 if [ $DEBUG_LEVEL -gt 0 -o $SIMULATION != 'no' ]; then
   echo "==============================================="

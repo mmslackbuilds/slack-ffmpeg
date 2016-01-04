@@ -164,6 +164,9 @@ xvidcore sbo PARAM=libxvid
 [zvbi]
 zvbi sbo PARAM=libzvbi
 
+[decklink]
+decklink-sdk sbo PARAM=decklink
+
 [openal]
 OpenAL sbo PARAM=openal
 
