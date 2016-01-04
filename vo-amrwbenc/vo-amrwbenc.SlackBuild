@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# Slackware build script for ffmpeg
+# Slackware build script for vo-amrwbenc
 
-# Copyright 2015 Dhaby Xiloj <slack.dhabyx@gmail.com>
+# Copyright 2016 Dhaby Xiloj <slack.dhabyx@gmail.com>
 # All rights reserved.
 #
 # Redistribution and use of this script, with or without modification, is
@@ -22,11 +22,10 @@
 #  OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 #  ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-PRGNAM=ffmpeg
-VERSION=${VERSION:-2.8.4}
+PRGNAM=vo-amrwbenc
+VERSION=${VERSION:-0.1.3}
 BUILD=${BUILD:-1}
 TAG=${TAG:-_mmsb}
-NON_FREE=${NON_FREE:-'yes'}
 
 if [ -z "$ARCH" ]; then
   case "$( uname -m )" in
@@ -36,8 +35,7 @@ if [ -z "$ARCH" ]; then
   esac
 fi
 
-DOCS="COPYING.* CREDITS INSTALL.md LICENSE.md MAINTAINERS README.md RELEASE*\
-      VERSION doc/*.txt"
+DOCS="COPYING ChangeLog NOTICE README"
 
 CWD=$(pwd)
 TMP=${TMP:-/tmp/build}
@@ -47,50 +45,24 @@ OUTPUT=${OUTPUT:-/tmp}
 if [ "$ARCH" = "i486" ]; then
   SLKCFLAGS="-O2 -march=i486 -mtune=i686"
   LIBDIRSUFFIX=""
-  ARCH_OPTS=""
 elif [ "$ARCH" = "i686" ]; then
   SLKCFLAGS="-O2 -march=i686 -mtune=i686"
   LIBDIRSUFFIX=""
-  ARCH_OPTS=""
 elif [ "$ARCH" = "x86_64" ]; then
   SLKCFLAGS="-O2 -fPIC"
   LIBDIRSUFFIX="64"
-  ARCH_OPTS="--arch=x86_64 --enable-pic"
 else
   SLKCFLAGS="-O2"
   LIBDIRSUFFIX=""
-  ARCH_OPTS=""
 fi
 
-set -e
-
-# environment sanity checks
-TEXI2HTML=$(which texi2html 2>/dev/null)
-
-if [ "$TEXI2HTML" = "" ]; then
-  echo "Could not find texi2html, you will ned to have true login shell"
-  echo "You will nedd to either use 'su -l' when switching to root or "
-  echo "source the /etc/profile before execute this SlackBuild"
-  exit 1
-fi
-
-# Only use non-free code if we are allowing it:
-if [ "${NON_FREE}" = "yes" ]; then
-  PATENTS_PARAMS="--enable-openssl \
-                --enable-nonfree \
-                --enable-gpl \
-                --enable-version3"
-else
-  PATENTS_PARAMS="--enable-gnutls \
-                --enable-gpl \
-                --enable-version3"
-fi
+set -e # Exit on most errors
 
 rm -rf $PKG
 mkdir -p $TMP $PKG $OUTPUT
 cd $TMP
 rm -rf $PRGNAM-$VERSION
-tar xf $CWD/$PRGNAM-$VERSION.tar.xz
+tar xvf $CWD/$PRGNAM-$VERSION.tar.gz
 cd $PRGNAM-$VERSION
 chown -R root:root .
 find -L . \
@@ -99,45 +71,16 @@ find -L . \
  \( -perm 666 -o -perm 664 -o -perm 640 -o -perm 600 -o -perm 444 \
   -o -perm 440 -o -perm 400 \) -exec chmod 644 {} \;
 
-echo "Configuring ffmpeg ..."
-
-# configure path for decklink headers according to SBo
-if [[ ${FFMPEG_DEPS} =~ --enable-decklink ]] ; then
-  SLKCFLAGS="$SLKCFLAGS -I/usr/include/decklink" ;
-fi
-
 CFLAGS="$SLKCFLAGS" \
 CXXFLAGS="$SLKCFLAGS" \
 ./configure \
   --prefix=/usr \
   --libdir=/usr/lib${LIBDIRSUFFIX} \
-  --shlibdir=/usr/lib${LIBDIRSUFFIX} \
-  --docdir=/usr/doc/${PRGNAM}-${VERSION} \
+  --sysconfdir=/etc \
+  --localstatedir=/var \
   --mandir=/usr/man \
-  --disable-debug \
-  --enable-shared \
-  --disable-static \
-  --enable-runtime-cpudetect \
-  --enable-libtheora \
-  --enable-libvorbis \
-  --enable-postproc \
-  --enable-swscale \
-  --enable-x11grab \
-  --enable-avfilter \
-  --enable-fontconfig \
-  --enable-libcaca \
-  --enable-libcdio \
-  --enable-libssh \
-  --enable-libsmbclient \
-  --enable-opengl \
-  --enable-libfreetype \
-  --enable-libfribidi \
-  --enable-libv4l2 \
-  --enable-libwavpack \
-  --enable-libvpx \
-  ${FFMPEG_DEPS} \
-  ${PATENTS_PARAMS} \
-  ${ARCH_OPTS}
+  --docdir=/usr/doc/$PRGNAM-$VERSION \
+  --build=$ARCH-slackware-linux
 
 make
 make install DESTDIR=$PKG
@@ -145,19 +88,12 @@ make install DESTDIR=$PKG
 find $PKG -print0 | xargs -0 file | grep -e "executable" -e "shared object" | grep ELF \
   | cut -f 1 -d : | xargs strip --strip-unneeded 2> /dev/null || true
 
-find $PKG/usr/man -type f -exec gzip -9 {} \;
-for i in $( find $PKG/usr/man -type l ) ; do ln -s $( readlink $i ).gz $i.gz ; rm $i ; done
-
-# Adding configuration for ffserver
-install -D doc/ffserver.conf $PKG/etc/ffserver.conf.new
-
 mkdir -p $PKG/usr/doc/$PRGNAM-$VERSION
 cp -a $DOCS $PKG/usr/doc/$PRGNAM-$VERSION
 cat $CWD/$PRGNAM.SlackBuild > $PKG/usr/doc/$PRGNAM-$VERSION/$PRGNAM.SlackBuild
 
 mkdir -p $PKG/install
 cat $CWD/slack-desc > $PKG/install/slack-desc
-cat $CWD/doinst.sh > $PKG/install/doinst.sh
 
 cd $PKG
 /sbin/makepkg -l y -c n $OUTPUT/$PRGNAM-$VERSION-$ARCH-$BUILD$TAG.${PKGTYPE:-tgz}

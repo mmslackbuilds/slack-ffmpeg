@@ -195,6 +195,7 @@ for CMD in "${EXEC_CMD_LIST[@]}"; do
   fi
 done
 
+# Area for testings
 # cd ffmpeg
 # ./ffmpeg.SlackBuild
 

@@ -60,8 +60,8 @@ External library support: ffmpeg 2.8.4
   --enable-libutvideo +     enable Ut Video encoding and decoding via libutvideo [no]
   --enable-libv4l2   *      enable libv4l2/v4l-utils [no]
   --enable-libvidstab +     enable video stabilization using vid.stab [no]
-  --enable-libvo-aacenc T   enable AAC encoding via libvo-aacenc [no]
-  --enable-libvo-amrwbenc T enable AMR-WB encoding via libvo-amrwbenc [no]
+  --enable-libvo-aacenc +   enable AAC encoding via libvo-aacenc [no]
+  --enable-libvo-amrwbenc + enable AMR-WB encoding via libvo-amrwbenc [no]
   --enable-libvorbis *      enable Vorbis en/decoding via libvorbis,
                            native implementation exists [no]
   --enable-libvpx  *        enable VP8 and VP9 de/encoding via libvpx [no]
@@ -69,7 +69,8 @@ External library support: ffmpeg 2.8.4
   --enable-libwebp +        enable WebP encoding via libwebp [no]
   --enable-libx264 +        enable H.264 encoding via x264 [no]
   --enable-libx265 +        enable HEVC encoding via x265 [no]
-  --enable-libxavs T        enable AVS encoding via xavs [no]
+  --enable-libxavs          enable AVS encoding via xavs [no]
+            xavs is very old, and not have any support for now
   --enable-libxcb  *        enable X11 grabbing using XCB [autodetect]
   --enable-libxcb-shm  *    enable X11 grabbing shm communication [autodetect]
   --enable-libxcb-xfixes *  enable X11 grabbing mouse rendering [autodetect]
@@ -79,8 +80,8 @@ External library support: ffmpeg 2.8.4
   --enable-libzmq          enable message passing via libzmq [no]
   --enable-libzvbi +        enable teletext support via libzvbi [no]
   --disable-lzma   *        disable lzma [autodetect]
-  --enable-decklink        enable Blackmagick DeckLink I/O support [no]
-  --enable-mmal  T          enable decoding via MMAL [no]
+  --enable-decklink +       enable Blackmagick DeckLink I/O support [no]
+  --enable-mmal             enable decoding via MMAL [no]
   --enable-nvenc           enable NVIDIA NVENC support [no]
   --enable-openal +         enable OpenAL 1.1 capture support [no]
   --enable-opencl          enable OpenCL code
