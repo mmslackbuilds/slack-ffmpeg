@@ -45,6 +45,10 @@ declare -a EXEC_CMD_LIST
 # string of deps added to ffmpeg.SlackBuild
 FFMPEG_DEPS=''
 
+# string of deps added to ffmpeg-compat.SlackBuild
+FFMPEG_COMPAT_DEPS=''
+source ./ffmpeg-compat/external-library-support
+
 # usage:
 #   sbopkgInstall PACKAGE [PARAMS]
 function sbopkgInstall()
@@ -77,6 +81,13 @@ function addToFFMPEG()
     echo "   PARAM: Adding optional param --enable-$1"
   fi
   FFMPEG_DEPS="${FFMPEG_DEPS}--enable-$1 "
+
+  # ffmpeg-compat options
+  TEST_COMPAT=${EXTERNAL_LIBRARY_SUPPORT[@]#$1}
+  if [ "${TEST_COMPAT}" != "${EXTERNAL_LIBRARY_SUPPORT[*]}" ]; then
+    # unequal means option is in external library support
+    FFMPEG_COMPAT_DEPS="${FFMPEG_COMPAT_DEPS}--enable-$1 "
+  fi
 }
 
 # process one line of optional-config file, test if parameters are correct and
@@ -181,6 +192,7 @@ if [ ${#BAD_OPTIONAL_PKG[*]} -gt 0 ]; then
 fi
 
 export FFMPEG_DEPS
+export FFMPEG_COMPAT_DEPS
 
 if [ $SIMULATION != 'no' ]; then
   echo "==============================================="
@@ -196,10 +208,11 @@ for CMD in "${EXEC_CMD_LIST[@]}"; do
 done
 
 # Area for testings
-# cd ffmpeg
-# ./ffmpeg.SlackBuild
+# cd ffmpeg-compat
+# ./ffmpeg-compat.SlackBuild
 
 if [ $DEBUG_LEVEL -gt 0 -o $SIMULATION != 'no' ]; then
   echo "==============================================="
   echo "Optional parameters added to ffmpeg.SlackBuild: "$FFMPEG_DEPS
+  echo "Optional parameters added to ffmpeg-compat.SlackBuild: "$FFMPEG_COMPAT_DEPS
 fi

@@ -187,3 +187,7 @@ pulseaudio sbo PARAM=libpulse
 [ffmpeg]
 ffmpeg slackbuild
 # opencv sbo RECURSIVE  #opencv can use ffmpeg
+
+## Extra packages
+[ffmpeg-compat]
+ffmpeg-compat slackbuild

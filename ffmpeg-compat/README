@@ -1,0 +1,2 @@
+This is ffmpeg 0.10.x series, but without cli commands, only
+basic libraries for use with some binaries like spotify and others.

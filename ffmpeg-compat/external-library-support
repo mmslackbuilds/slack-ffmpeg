@@ -1,0 +1,43 @@
+## extra list of libraries for ffmpeg-compat
+## this list is extracted with ./configure --help
+
+EXTERNAL_LIBRARY_SUPPORT=( \
+avisynth \
+bzlib \
+frei0r \
+gnutls \
+libaacplus \
+libass \
+libcelt \
+libopencore-amrn \
+libopencore-amrw \
+libopencv \
+libcdio \
+libdc1394 \
+libdirac \
+libfaac \
+libfreetype \
+libgsm \
+libmodplug \
+libmp3lame \
+libnut \
+libopenjpeg \
+libpulse \
+librtmp \
+libschroedinge \
+libspeex \
+libstagefright-h264 \
+libtheora \
+libv4l2 \
+libvo-aacenc \
+libvo-amrwbenc \
+libvorbis \
+libvpx \
+libx264 \
+libxavs \
+libxvid \
+openal \
+mlib \
+openssl \
+zlib \
+)

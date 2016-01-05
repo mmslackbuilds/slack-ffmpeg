@@ -26,8 +26,8 @@ opencv # video filtering via libopencv
 openjpeg # JPEG 2000 de/encoding via OpenJPEG
 opus # Opus de/encoding via libopus
 
-# Not all users like to pulseaudio in slackware
-# pulseaudio # Pulseaudio input via libpulse
+# Not all users likes pulseaudio in slackware
+pulseaudio # Pulseaudio input via libpulse
 
 libquvi # quvi input via libquvi
 rtmpdump # RTMP[E] support via librtmp
@@ -48,3 +48,9 @@ x265 # enable HEVC encoding via x265
 xvidcore # Xvid encoding via xvidcore
 zvbi # teletext support via libzvbi
 openal # OpenAL 1.1 capture support
+
+## extra packages section
+#
+## Old ffmpeg, only with libav libraries for compat with some binaries
+## like spotify
+ffmpeg-compat
